@@ -1,0 +1,19 @@
+.layout {
+  width: 100%;
+  /* max-width: none; */ /* No longer needed here if SidebarInset handles it */
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Remove unused styles */
+/* .content {
+  flex: 1;
+  width: 100%;
+  max-width: none;
+} */
+
+/* .main {
+  width: 100%;
+  max-width: none;
+  padding: 1.5rem;
+} */ 

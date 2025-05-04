@@ -4,13 +4,22 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { AppProvider as PolarisAppProvider, Frame, Loading, Toast } from "@shopify/polaris"
-import { AppProvider } from "@shopify/app-bridge-react"
+// @ts-ignore
+import { AppProvider as AppBridgeProvider } from "@shopify/app-bridge-react"
 import { useRouter } from "next/navigation"
 import "@shopify/polaris/build/esm/styles.css"
 
+// Define an interface for the App Bridge configuration
+interface AppBridgeConfig {
+  apiKey: string;
+  host: string;
+  forceRedirect?: boolean;
+}
+
 export default function ShopifyLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const [appBridgeConfig, setAppBridgeConfig] = useState(null)
+  // Use the interface with useState, allowing the state to be the config object or null
+  const [appBridgeConfig, setAppBridgeConfig] = useState<AppBridgeConfig | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [toastProps, setToastProps] = useState({ content: "", error: false, active: false })
 
@@ -32,13 +41,13 @@ export default function ShopifyLayout({ children }: { children: React.ReactNode 
   }, [])
 
   // Show toast message
-  const showToast = ({ content, error = false }) => {
+  const showToast = ({ content, error = false }: { content: string; error?: boolean }) => {
     setToastProps({ content, error, active: true })
   }
 
   // Hide toast message
   const hideToast = () => {
-    setToastProps((prev) => ({ ...prev, active: false }))
+    setToastProps((prev: { content: string; error: boolean; active: boolean }) => ({ ...prev, active: false }))
   }
 
   // If we're still loading the configuration, show a loading indicator
@@ -66,14 +75,16 @@ export default function ShopifyLayout({ children }: { children: React.ReactNode 
 
   return (
     <PolarisAppProvider i18n={{}}>
-      <AppProvider config={appBridgeConfig}>
+      <AppBridgeProvider config={appBridgeConfig}>
         <Frame>
           {toastProps.active && <Toast content={toastProps.content} error={toastProps.error} onDismiss={hideToast} />}
 
-          {/* Our app content */}
-          <div className="shopify-app-wrapper">{children}</div>
+          {/* Main content wrapper with consistent width */}
+          <div className="w-full max-w-[1200px] mx-auto px-4">
+            {children}
+          </div>
         </Frame>
-      </AppProvider>
+      </AppBridgeProvider>
     </PolarisAppProvider>
   )
 }

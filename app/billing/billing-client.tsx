@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   ArrowRight,
   Check,
@@ -28,10 +28,30 @@ import { Progress } from "@/components/ui/progress"
 import { Switch } from "@/components/ui/switch"
 
 export default function BillingClient() {
+  useEffect(() => {
+    const fixWidthIssues = () => {
+      const container = document.querySelector(".shopify-app-content")
+      if (container) {
+        container.classList.add("w-full", "max-w-none")
+      }
+
+      const parents = document.querySelectorAll(".Polaris-Frame__Content, .Polaris-Page, .Polaris-Layout")
+      parents.forEach((el) => {
+        el.classList.add("w-full", "max-w-none")
+      })
+    }
+
+    fixWidthIssues()
+    const observer = new MutationObserver(fixWidthIssues)
+    observer.observe(document.body, { childList: true, subtree: true })
+
+    return () => observer.disconnect()
+  }, [])
+
   const [selectedPlan, setSelectedPlan] = useState("pro")
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-none">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Billing & Subscription</h2>

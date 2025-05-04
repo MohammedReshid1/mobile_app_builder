@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell, Calendar, Clock, Filter, Plus, Search, Send, Settings, Smartphone } from "lucide-react"
+import { useState } from "react"
+import { Bell, Calendar, Clock, Filter, Plus, Search, Send, Settings, Smartphone, MoreHorizontal, ChevronDown, ChevronUp } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,27 +9,31 @@ import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 
 export default function PushNotificationsClient() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Push Notifications</h2>
-          <p className="text-muted-foreground">Manage and send push notifications to your mobile app users</p>
+          <p className="text-muted-foreground">Send targeted messages to your app users</p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <Button variant="outline" size="sm">
-            <Settings className="mr-2 h-4 w-4" />
-            Settings
-          </Button>
-          <Button size="sm">
+        <div className="flex items-center space-x-4">
+          <Button>
             <Plus className="mr-2 h-4 w-4" />
-            Create Notification
+            Create Campaign
           </Button>
         </div>
       </div>

@@ -260,10 +260,14 @@ export default function IntegrationsClient() {
         <TabsContent value="all" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filterIntegrations(
-              [...paymentIntegrations, ...ecommerceIntegrations, ...marketingIntegrations],
+              [
+                ...paymentIntegrations.map(int => ({ ...int, type: 'payment' })),
+                ...ecommerceIntegrations.map(int => ({ ...int, type: 'ecommerce' })),
+                ...marketingIntegrations.map(int => ({ ...int, type: 'marketing' })),
+              ],
               searchQuery,
             ).map((integration) => (
-              <IntegrationCard key={integration.id} integration={integration} />
+              <IntegrationCard key={`${integration.type}-${integration.id}`} integration={integration} />
             ))}
           </div>
         </TabsContent>

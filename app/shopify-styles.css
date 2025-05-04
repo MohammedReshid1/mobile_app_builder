@@ -1,0 +1,40 @@
+/* Shopify-specific styles to fix width issues */
+.shopify-app-wrapper {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.shopify-app-content {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Fix for embedded app context */
+.Polaris-Frame__Content {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Override any restrictive width settings */
+[class*="page-width"],
+[class*="container"],
+[class*="content-width"] {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Ensure grid layouts use full width */
+.grid,
+.grid-cols-1,
+.grid-cols-2,
+.grid-cols-3,
+.grid-cols-4 {
+  width: 100% !important;
+}
+
+/* Fix for any card components */
+.card,
+[class*="Card"] {
+  width: 100% !important;
+} 
