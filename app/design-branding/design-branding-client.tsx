@@ -96,7 +96,7 @@ export default function DesignBrandingClient() {
                           id="primary-color"
                           type="text"
                           value={primaryColor}
-                          onChange={(e) => setPrimaryColor(e.target.value)}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrimaryColor(e.target.value)}
                         />
                       </div>
                     </div>
@@ -108,7 +108,7 @@ export default function DesignBrandingClient() {
                           id="secondary-color"
                           type="text"
                           value={secondaryColor}
-                          onChange={(e) => setSecondaryColor(e.target.value)}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSecondaryColor(e.target.value)}
                         />
                       </div>
                     </div>
@@ -521,6 +521,7 @@ export default function DesignBrandingClient() {
                         <SelectItem value="css">CSS Variables</SelectItem>
                         <SelectItem value="scss">SCSS</SelectItem>
                       </SelectContent>
+                    </Select>
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
